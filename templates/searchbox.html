@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ Search</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <h1>Search FAQs</h1>
+    <input type="text" id="searchBox" placeholder="Type your question..." oninput="fetchFAQs()" autofocus>
+    <div id="results"></div>
+
+    <script>
+        async function fetchFAQs() {
+    const query = document.getElementById('searchBox').value;
+
+    // Check if the query is empty
+    if (query.trim() === '') {
+        // Clear the results if the input is empty
+        document.getElementById('results').innerHTML = '';
+        return; // Exit the function early
+    }
+
+    const response = await fetch(`/search?query=${encodeURIComponent(query)}`);
+    const data = await response.json();
+    displayResults(data.faqs);
+}
+
+        function displayResults(faqs) {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '';
+
+            faqs.forEach(faq => {
+                const faqContainer = document.createElement('div');
+                faqContainer.className = 'faq-container';
+
+                const faqItem = document.createElement('div');
+                faqItem.className = 'faq-item';
+                faqItem.textContent = faq;
+                faqItem.onclick = () => toggleAnswer(faq, faqContainer);  // Add click event
+
+                const answerDiv = document.createElement('div');
+                answerDiv.className = 'answer';
+                answerDiv.style.display = 'none'; // Initially hide the answer
+
+                faqContainer.appendChild(faqItem);
+                faqContainer.appendChild(answerDiv);
+                resultsDiv.appendChild(faqContainer);
+            });
+        }
+
+        async function toggleAnswer(question, container) {
+            const answerDiv = container.querySelector('.answer');
+            if (answerDiv.style.display === 'block') {
+                answerDiv.style.display = 'none'; // Hide answer if already shown
+            } else {
+                const response = await fetch(`/answer?question=${encodeURIComponent(question)}`);
+                const data = await response.json();
+                answerDiv.innerHTML = `<strong>Answer:</strong> ${data.answer}`;
+                answerDiv.style.display = 'block'; // Show answer
+            }
+        }
+    </script>
+
+</body>
+</html>

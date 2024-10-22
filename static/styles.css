@@ -1,0 +1,86 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 50px;
+    text-align: center;
+    background-color: #f4f4f4; /* Light background color for the entire page */
+}
+
+#searchBox {
+    width: 300px;
+    padding: 12px 15px;
+    border: 2px solid #007bff; /* Slightly thicker border for better visibility */
+    border-radius: 25px; /* Fully rounded corners */
+    font-size: 16px;
+    transition: all 0.3s ease;
+    outline: none;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2); /* Enhanced shadow for depth */
+    background: linear-gradient(to right, #f0f8ff, #e6f7ff); /* Light gradient background */
+}
+
+#searchBox:focus {
+    border-color: #0056b3; /* Darker blue on focus for better contrast */
+    box-shadow: 0 4px 20px rgba(0, 86, 179, 0.4); /* More prominent shadow on focus */
+    transform: scale(1.05); /* Slight zoom-in effect */
+}
+
+#results {
+    margin-top: 20px;
+    text-align: left; /* Align text to the left */
+    max-width: 600px; /* Limit the width of the results */
+    margin: 20px auto; /* Center the results on the page */
+}
+
+.faq-container {
+    margin: 10px 0;
+}
+
+.faq-item {
+    border: 1px solid #ddd;
+    padding: 15px; /* Increased padding for better spacing */
+    border-radius: 10px; /* Slightly rounded corners */
+    cursor: pointer;
+    background-color: #ffffff; /* White background for clarity */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.faq-item:hover {
+    background-color: #f7f7f7; /* Change background on hover */
+    transform: translateY(-2px); /* Slight lift on hover */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* More prominent shadow on hover */
+}
+
+.answer {
+    margin-top: 5px;
+    padding: 10px;
+    border-left: 4px solid #007bff; /* Left border for answer */
+    background-color: #e9ecef; /* Light gray background for the answer */
+    display: none; /* Initially hidden */
+    animation: fadeIn 0.5s ease; /* Fade-in effect */
+    max-width: 500px; /* Limit the width of the answer box */
+    margin: 10px auto; /* Center the answer box */
+    word-wrap: break-word; /* Ensure long words wrap correctly */
+    border-radius: 5px; /* Slightly rounded corners for the answer box */
+}
+
+/* Add a fade-in animation for the answers */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Additional styles for better readability */
+.answer strong {
+    color: #0056b3; /* Darker blue for answer labels */
+    font-weight: bold; /* Bold font for emphasis */
+}
+
+.answer p {
+    margin: 0; /* Remove margin from paragraphs in the answer */
+    line-height: 1.5; /* Increase line height for better readability */
+    color: #333; /* Dark gray color for answer text */
+}
